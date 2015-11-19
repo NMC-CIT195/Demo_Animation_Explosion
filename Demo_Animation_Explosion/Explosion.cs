@@ -11,7 +11,7 @@ using Demo_Animation_Explosion;
 namespace Demo_Animation_Explosion
 {
     /// <summary>
-    /// An animated explosion object
+    /// the animated explosion class
     /// </summary>
     public class Explosion
     {
@@ -19,9 +19,9 @@ namespace Demo_Animation_Explosion
 
         // sprite strip info
         private Texture2D _spriteStrip;
-        private const int _rows = 3;
-        private const int _columns = 3;
-        private const int _numberOfFrames = 9;
+        private const int _ROWS = 3;
+        private const int _COLUMNS = 3;
+        private const int _NUMBER_OF_FRAMES = 9;
 
         // explosion location
         private Rectangle _drawRectangle;
@@ -50,7 +50,7 @@ namespace Demo_Animation_Explosion
         #region Constructors
 
         /// <summary>
-        /// Constructs a new explosion object
+        /// Construct a new explosion object
         /// </summary>
         /// <param name="contentManager">the content manager</param>
         public Explosion(ContentManager contentManager)
@@ -86,7 +86,7 @@ namespace Demo_Animation_Explosion
                     _elapsedFrameTime = 0;
 
                     // advance the animation
-                    if (_currentFrame < _numberOfFrames - 1)
+                    if (_currentFrame < _NUMBER_OF_FRAMES - 1)
                     {
                         _currentFrame++;
                     }
@@ -107,13 +107,13 @@ namespace Demo_Animation_Explosion
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             // calculate frame size
-            _frameWidth = _spriteStrip.Width / _rows;
-            _frameHeight = _spriteStrip.Height / _columns;
+            _frameWidth = _spriteStrip.Width / _ROWS;
+            _frameHeight = _spriteStrip.Height / _COLUMNS;
 
             // set the source rectangle for the current frame on the sprite strip
             _sourceRectangle = new Rectangle(0, 0, _frameWidth, _frameHeight);            
-            _sourceRectangle.X = (_currentFrame % _rows) * _frameWidth;
-            _sourceRectangle.Y = (_currentFrame / _columns) * _frameHeight;
+            _sourceRectangle.X = (_currentFrame % _ROWS) * _frameWidth;
+            _sourceRectangle.Y = (_currentFrame / _COLUMNS) * _frameHeight;
 
             // set the draw rectangle for the current frame on the screen
             _drawRectangle = new Rectangle(0, 0, _frameWidth, _frameHeight);
@@ -122,14 +122,13 @@ namespace Demo_Animation_Explosion
 
             spriteBatch.Draw(_spriteStrip, _drawRectangle, _sourceRectangle, Color.White);
         }
-
-
+        
         #endregion
 
         #region Private methods
 
         /// <summary>
-        /// Loads the content for the explosion
+        /// Load the content for the explosion
         /// </summary>
         /// <param name="contentManager">the content manager</param>
         private void LoadContent(ContentManager contentManager)

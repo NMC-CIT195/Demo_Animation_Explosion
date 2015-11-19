@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Demo_Animation_Explosion
 {
     /// <summary>
-    /// An Apple object
+    /// the Apple class
     /// </summary>
     public class Apple
     {
@@ -22,8 +22,8 @@ namespace Demo_Animation_Explosion
         private Rectangle _drawRectangle;
 
         // set sprite size
-        private const int _spriteWidth = 64;
-        private const int _spriteHeight = 64;
+        private const int _SPRITE_WIDTH = 64;
+        private const int _SPRITE_HEIGHT = 64;
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace Demo_Animation_Explosion
         #region Constructors
 
         /// <summary>
-        /// Constructs a new explosion object
+        /// constructs a new explosion object
         /// </summary>
         /// <param name="contentManager">the content manager</param>
         public Apple(ContentManager contentManager)
@@ -54,20 +54,19 @@ namespace Demo_Animation_Explosion
         #region Public methods
 
         /// <summary>
-        /// Draws the apple
+        /// draw the apple
         /// </summary>
         /// <param name="spriteBatch">the spritebatch</param>
         /// <param name="location">the Vector2 location of the apple on the screen</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 location)
         {
             // set the draw rectangle for the sprite on the screen
-            _drawRectangle = new Rectangle(0, 0, _spriteWidth, _spriteHeight);
+            _drawRectangle = new Rectangle(0, 0, _SPRITE_WIDTH, _SPRITE_HEIGHT);
             _drawRectangle.X = (int)location.X;
             _drawRectangle.Y = (int)location.Y;
 
             spriteBatch.Draw(_sprite, _drawRectangle, Color.White);
         }
-
 
         #endregion
 

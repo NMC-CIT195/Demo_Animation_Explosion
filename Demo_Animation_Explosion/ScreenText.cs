@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace Demo_Animation_Explosion
 {
     /// <summary>
-    /// An Apple object
+    /// a class to generate text on the screen
     /// </summary>
     public class ScreenText
     {
@@ -22,7 +22,7 @@ namespace Demo_Animation_Explosion
 
         #region PROPERTIES
 
-        // Boolean to set status through the game loop
+        // boolean to set status through the game loop
         public bool Active { get; set; }
 
         #endregion
@@ -30,7 +30,7 @@ namespace Demo_Animation_Explosion
         #region Constructors
 
         /// <summary>
-        /// Constructs a new screen text object
+        /// construct a new screen text object
         /// </summary>
         /// <param name="contentManager">the content manager</param>
         public ScreenText(ContentManager contentManager)
@@ -47,16 +47,15 @@ namespace Demo_Animation_Explosion
         #region Public methods
 
         /// <summary>
-        /// Draws the apple
+        /// draw the text
         /// </summary>
         /// <param name="spriteBatch">the spritebatch</param>
-        /// <param name="location">the Vector2 location of the apple on the screen</param>
+        /// <param name="location">the Vector2 location of the text on the screen</param>
         public void Draw(SpriteBatch spriteBatch, Vector2 location, string message)
         {
             spriteBatch.DrawString(_textFont, message, new Vector2(100, 100), Color.Black);
         }
-
-
+        
         #endregion
 
     }

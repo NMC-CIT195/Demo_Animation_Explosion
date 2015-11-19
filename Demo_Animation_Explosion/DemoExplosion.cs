@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 namespace Demo_Animation_Explosion
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// MonoGame to demonstrate how to implement an animation
     /// </summary>
     public class DemoExplosion : Game
     {
@@ -28,6 +28,9 @@ namespace Demo_Animation_Explosion
         private Explosion _appleExplosion;
         private ScreenText _screenText;
 
+        /// <summary>
+        /// game constructor initializes the window
+        /// </summary>
         public DemoExplosion()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -39,14 +42,12 @@ namespace Demo_Animation_Explosion
             _graphics.PreferredBackBufferWidth = _gameWindowWidth;
             _graphics.PreferredBackBufferHeight = _gameWindowHeight;
 
+            // game content location
             Content.RootDirectory = "Content";
         }
 
         /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
+        /// initialize the starting locations for each game object
         /// </summary>
         protected override void Initialize()
         {
@@ -64,8 +65,7 @@ namespace Demo_Animation_Explosion
         }
 
         /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
+        /// load all of the game content into the Content object
         /// </summary>
         protected override void LoadContent()
         {
@@ -80,13 +80,10 @@ namespace Demo_Animation_Explosion
             // make apple and text visible
             _apple.Active = true;
             _screenText.Active = true;
-
-
-
         }
 
         /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
+        /// unload all of the content from the Content object
         /// game-specific content.
         /// </summary>
         protected override void UnloadContent()
@@ -95,11 +92,46 @@ namespace Demo_Animation_Explosion
         }
 
         /// <summary>
-        /// Allows the game to run logic such as updating the world,
+        /// this method is call once for each game "click"
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
+        {
+            // handle any new keyboard events
+            HandleKeyboardEvents();
+
+            // if explosion is active update frame
+            if (_appleExplosion.Active) _appleExplosion.Update(gameTime);
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// this method is call once for each game "click"
+        /// and draws all active game objects
+        /// </summary>
+        /// <param name="gameTime">provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.GreenYellow);
+
+            _spriteBatch.Begin();
+
+            string message = "Press the 'e' to explode the apple.\n Press the Escape key to quit.";
+
+            if (_screenText.Active) _screenText.Draw(_spriteBatch, new Vector2(200, 200), message);
+
+            if (_apple.Active) _apple.Draw(_spriteBatch, new Vector2(200, 200));
+
+            if (_appleExplosion.Active) _appleExplosion.Draw(_spriteBatch, new Vector2(200, 200));
+
+            _spriteBatch.End();
+
+            base.Draw(gameTime);
+        }
+
+        private void HandleKeyboardEvents()
         {
             // get new state of keyboard
             _keyboardNewState = Keyboard.GetState();  // get the newest state
@@ -121,34 +153,6 @@ namespace Demo_Animation_Explosion
 
             // set the new state of the keyboard as the old state
             _keyboardOldState = _keyboardNewState;
-
-            // if explosion is active update frame
-            if (_appleExplosion.Active) _appleExplosion.Update(gameTime);
-
-            base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.GreenYellow);
-
-            _spriteBatch.Begin();
-
-            string message = "Press the 'e' to explode the apple.\n Press the Escape key to quit.";
-
-            if (_screenText.Active) _screenText.Draw(_spriteBatch, new Vector2(200, 200), message);
-
-            if (_apple.Active) _apple.Draw(_spriteBatch, new Vector2(200, 200));
-
-            if (_appleExplosion.Active) _appleExplosion.Draw(_spriteBatch, new Vector2(200, 200));
-
-            _spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }
